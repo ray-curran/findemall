@@ -348,7 +348,8 @@ def main(searched_spot):
                         'distance_apart': int(origin.get_distance(other).radians * 6366468.241830914),
                         'direction': direction,
                         'poke_number': poke.PokedexNumber,
-                        'poke_name': pokemons[poke.PokedexNumber - 1]['Name']
+                        'poke_name': pokemons[poke.PokedexNumber - 1]['Name'],
+                        'time_visible': 'some number of'
                     })
                     print results
                     id_random += 1
