@@ -37,6 +37,19 @@
 	min-height: 370px;
 }
 
+.angular-google-map-container {
+  height: 650px;
+}
+
+ui-gmap-google-map {
+  position: fixed;
+  z-index: -1;
+  right: 0;
+  bottom: 0;
+  top: 7em;
+  width: 50%;
+}
+
 .footer-left {
 	float: left;
 }
@@ -54,7 +67,7 @@
     position:absolute;
     top:0;
     left:0;
-    width:100%;
+    width:50%;
     height:100%;
     z-index:1000;
  }
@@ -74,7 +87,6 @@
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-
 
 
 
