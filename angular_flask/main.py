@@ -381,7 +381,7 @@ def main(searched_spot):
         walk = getNeighbors()
         next = LatLng.from_point(Cell(CellId(walk[2])).get_center())
         counter += 1
-        if counter >= 3:
+        if counter >= 5:
         # raw_input('The next cell is located at %s. Keep scanning? [Y/n]' % next) in {'n', 'N'}:
             break
         set_location_coords(next.lat().degrees, next.lng().degrees, 0)
