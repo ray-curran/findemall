@@ -1,1 +1,1 @@
-web: gunicorn runserver:app -w 3 --timeout 60
+web: gunicorn runserver:app -w 3
