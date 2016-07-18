@@ -27,9 +27,15 @@ def basic_pages(**kwargs):
 # passes routing onto the angular frontend if the requested resource exists
 from sqlalchemy.sql import exists
 
-@app.route('/api/testing')
-def testing():
-    return jsonify(**main())
+# @app.route('/api/testing')
+# def testing():
+#     return jsonify(**main('130 Sinaloa, Mexico City'))
+
+@app.route('/api/testing/<spot>')
+def testing(spot):
+    return jsonify(**main(spot))
+
+
 
 
 # special file handlers and error handlers

@@ -232,7 +232,7 @@ def heartbeat(api_endpoint, access_token, response):
     heartbeat.ParseFromString(payload)
     return heartbeat
 
-def main():
+def main(searched_spot):
     pokemons = json.load(open('pokemon.json'))
     # parser = argparse.ArgumentParser()
     args = {
@@ -243,7 +243,7 @@ def main():
     }
     args['username'] = 'testeruserray'
     args['password'] = 'testing'
-    args['location'] = '130 Sinaloa, Mexico City'
+    args['location'] = searched_spot
     args['debug'] = False
     # parser.add_argument("-u", "--username", help="PTC Username", required=True)
     # parser.add_argument("-p", "--password", help="PTC Password", required=True)
@@ -304,6 +304,7 @@ def main():
     origin = LatLng.from_degrees(FLOAT_LAT, FLOAT_LONG)
     results['pokemon_close'] = []
     counter = 0
+    id_random = 1;
     while True:
         original_lat = FLOAT_LAT
         original_long = FLOAT_LONG
@@ -340,6 +341,8 @@ def main():
                 print("Within one step of %s (%sm %s from you):" % (other, int(origin.get_distance(other).radians * 6366468.241830914), direction))
                 for poke in cell.NearbyPokemon:
                     results['pokemon_close'].append({
+                        'id': id_random,
+                        'icon': '../images/' + str(poke.PokedexNumber).zfill(3) + '.png',
                         'latitude': other.lat().degrees,
                         'longitude': other.lng().degrees,
                         'distance_apart': int(origin.get_distance(other).radians * 6366468.241830914),
@@ -347,6 +350,8 @@ def main():
                         'poke_number': poke.PokedexNumber,
                         'poke_name': pokemons[poke.PokedexNumber - 1]['Name']
                     })
+                    print results
+                    id_random += 1
                     print('    (%s) %s' % (poke.PokedexNumber, pokemons[poke.PokedexNumber - 1]['Name']))
 
         print('')
@@ -358,6 +363,8 @@ def main():
             difflng = diff.lng().degrees
             direction = (('N' if difflat >= 0 else 'S') if abs(difflat) > 1e-4 else '')  + (('E' if difflng >= 0 else 'W') if abs(difflng) > 1e-4 else '')
             results['pokemon_close'].append({
+                        'id': id_random,
+                        'icon': '../images/' + str(poke.pokemon.PokemonId).zfill(3) + '.png',
                         'latitude': poke.Latitude,
                         'longitude': poke.Longitude,
                         'distance_apart': int(origin.get_distance(other).radians * 6366468.241830914),
@@ -366,6 +373,7 @@ def main():
                         'poke_name': pokemons[poke.pokemon.PokemonId - 1]['Name'],
                         'time_visible': poke.TimeTillHiddenMs / 1000
                     })
+            id_random += 1
             print("(%s) %s is visible at (%s, %s) for %s seconds (%sm %s from you)" % (poke.pokemon.PokemonId, pokemons[poke.pokemon.PokemonId - 1]['Name'], poke.Latitude, poke.Longitude, poke.TimeTillHiddenMs / 1000, int(origin.get_distance(other).radians * 6366468.241830914), direction))
 
         print('')
